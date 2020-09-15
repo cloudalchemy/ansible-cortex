@@ -1,0 +1,16 @@
+---
+- name: Create the cortex group
+  group:
+    name: "{{ cortex_system_group }}"
+    state: present
+    system: true
+
+- name: Create the cortex user
+  user:
+    name: "{{ cortex_system_user }}"
+    groups: "{{ cortex_system_group }}"
+    append: true
+    shell: /usr/sbin/nologin
+    system: true
+    createhome: false
+    home: /

@@ -1,0 +1,36 @@
+---
+- name: Gather variables for each operating system
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution_file_variety | lower }}.yml"
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
+  tags:
+    - cortex_install
+    - cortex_configure
+    - cortex_run
+
+- import_tasks: preflight.yml
+  tags:
+    - cortex_install
+    - cortex_configure
+    - cortex_run
+
+- import_tasks: install.yml
+  become: true
+  tags:
+    - cortex_install
+
+- import_tasks: configure.yml
+  become: true
+  tags:
+    - cortex_configure
+
+- name: Ensure cortex is enabled on boot
+  become: true
+  systemd:
+    daemon_reload: true
+    name: cortex
+    enabled: true
+  tags:
+    - cortex_run

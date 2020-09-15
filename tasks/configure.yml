@@ -1,0 +1,9 @@
+---
+- name: Copy the cortex systemd service file
+  template:
+    src: cortex.service.j2
+    dest: /etc/systemd/system/cortex.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart cortex
