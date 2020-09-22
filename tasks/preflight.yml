@@ -51,8 +51,6 @@
       set_fact:
         __cortex_checksum: "{{ item.split(' ')[0] }}"
       with_items: "{{ __cortex_checksums }}"
-        #when:
-        #  - "('linux-' + go_arch + '.tar.gz') in item"
   delegate_to: localhost
   when:
     - cortex_binary_local_dir | length == 0

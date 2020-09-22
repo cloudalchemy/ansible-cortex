@@ -36,27 +36,27 @@
     - "{{ cortex_config_dir }}/rules"
 
 - block:
-  - name: download cortex binary and install it
-    become: false
-    get_url:
-      url: "https://github.com/cortexproject/cortex/releases/download/v{{ cortex_version  }}/cortex-linux-amd64"
-      dest: "/tmp/cortex-linux-amd64"
-      checksum: "sha256:{{ __cortex_checksum}}"
-    register: _download_archive
-    until: _download_archive is succeeded
-    retries: 5
-    delay: 2
-    delegate_to: localhost
-    check_mode: false
+    - name: download cortex binary and install it
+      become: false
+      get_url:
+        url: "https://github.com/cortexproject/cortex/releases/download/v{{ cortex_version  }}/cortex-linux-amd64"
+        dest: "/tmp/cortex-linux-amd64"
+        checksum: "sha256:{{ __cortex_checksum }}"
+      register: _download_archive
+      until: _download_archive is succeeded
+      retries: 5
+      delay: 2
+      delegate_to: localhost
+      check_mode: false
 
-  - name: propagate official cortex
-    copy:
-      src: "/tmp/cortex-linux-amd64"
-      dest: "{{ _cortex_binary_install_dir }}/cortex-linux-amd64"
-      mode: 0755
-      owner: root
-      group: root
-    notify: restart cortex
+    - name: propagate official cortex
+      copy:
+        src: "/tmp/cortex-linux-amd64"
+        dest: "{{ _cortex_binary_install_dir }}/cortex-linux-amd64"
+        mode: 0755
+        owner: root
+        group: root
+      notify: restart cortex
 
   when:
     - cortex_binary_local_dir | length == 0
