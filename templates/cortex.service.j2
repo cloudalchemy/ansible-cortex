@@ -1,17 +1,17 @@
 {{ ansible_managed | comment }}
 
 [Unit]
-Description=<<APPLICATION>>
+Description=cortex
 After=network-online.target
 StartLimitInterval=0
 StartLimitIntervalSec=0
 
 [Service]
 Type=simple
-User={{ <<APPLICATION>>_system_user }}
-Group={{ <<APPLICATION>>_system_group }}
-ExecStart=/usr/local/bin/<<APPLICATION>>
-SyslogIdentifier=<<APPLICATION>>
+User={{ cortex_system_user }}
+Group={{ cortex_system_group }}
+ExecStart=/usr/local/bin/cortex
+SyslogIdentifier=cortex
 Restart=always
 RestartSec=5
 

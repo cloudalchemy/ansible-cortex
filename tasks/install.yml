@@ -1,16 +1,87 @@
 ---
-- name: Create the <<APPLICATION>> group
+- name: Create the cortex group
   group:
-    name: "{{ <<APPLICATION>>_system_group }}"
+    name: "{{ cortex_system_group }}"
     state: present
     system: true
 
-- name: Create the <<APPLICATION>> user
+- name: Create the cortex user
   user:
-    name: "{{ <<APPLICATION>>_system_user }}"
-    groups: "{{ <<APPLICATION>>_system_group }}"
+    name: "{{ cortex_system_user }}"
+    groups: "{{ cortex_system_group }}"
     append: true
     shell: /usr/sbin/nologin
     system: true
     createhome: false
     home: /
+
+- block:
+  - name: download cortex binary and install it
+    become: false
+    get_url:
+      url: "https://github.com/cortexproject/cortex/releases/download/v{{ cortex_version  }}/cortex-linux-amd64"
+      dest: "/tmp/cortex-linux-amd64"
+      checksum: "sha256:{{ __cortex_checksum}}"
+    register: _download_archive
+    until: _download_archive is succeeded
+    retries: 5
+    delay: 2
+    delegate_to: localhost
+    check_mode: false
+
+  - name: propagate official cortex
+    copy:
+      src: "/tmp/cortex-linux-amd64"
+      dest: "{{ _cortex_binary_install_dir }}/cortex-linux-amd64"
+      mode: 0755
+      owner: root
+      group: root
+      notify: restarting cortex
+
+  when:
+    - cortex_binary_local_dir | length == 0
+    - not cortex_skip_install
+
+ - name: propagate locally distributed cortex
+   copy:
+     src: "{{ cortex_binary_local_dir }}/cortex-linux-amd64"
+     dest: "{{ _cortex_binary_install_dir }}/cortex-linux-amd64"
+     mode: 0755
+     owner: root
+     group: root
+  when:
+    - cortex_binary_local_dir | length > 0
+    - not cortex_skip_install
+
+- name: create systemd service unit
+  template:
+    src: cortex.service.j2
+    dest: /etc/systemd/system/cortex.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart prometheus
+
+- name: Install SELinux dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with-items: "{{ cortex_selinux_packages }}"
+  register: _install_packages
+  until: _install_packages is succeeded
+  retries: 5
+  delay: 2
+  when:
+    - ansible_version.full is version('2.4', '>=')
+    - ansible_selinux.status == "enabled"
+
+- name: Allow prometheus to bind to port in SELinux
+  seport:
+    ports: "{{ cortex_web_listen_address.split(':')[1] }}"
+    proto: tcp
+    setype: http_port_t
+    state: present
+  when:
+    - ansible_version.full is version('2.4', '>=')
+    - ansible_selinux.status == "enabled"

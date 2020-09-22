@@ -8,5 +8,5 @@ go_arch_map:
 
 go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
 
-<<APPLICATION>>_system_user: "<<APPLICATION>>"
-<<APPLICATION>>_system_group: "<<APPLICATION>>"
+cortex_system_user: "cortex"
+cortex_system_group: "cortex"
