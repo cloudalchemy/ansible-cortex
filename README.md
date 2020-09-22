@@ -7,7 +7,7 @@
 
 ## Description
 
-Deploy [cortex](https://github.com/prometheus/cortex) using ansible.
+Deploy [cortex](https://github.com/cortexproject/cortex) using ansible.
 
 ## Requirements
 
@@ -20,6 +20,25 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | Name           | Default Value | Description                        |
 | -------------- | ------------- | -----------------------------------|
 | `cortex_web_listen_address` | "0.0.0.0:9009" | Address on which cortex will listen |
+| `cortex_binary_local_dir` | "" | Allows to use local packages instead of ones distributed on github. As parameter it takes a directory where `cortex` binaries are stored on host on which ansible is ran. This overrides `cortex_version` parameter |
+| `cortex_interface` | "{{ ansible_default_ipv4.interface }}" | Network adapter that cortex will be using |
+| `cortex_config_dir` | "/etc/cortex" | Default directory for the cortex config |
+| `cortex_db_dir` | "/var/lib/cortex" | Path to the directory of the Cortex database |
+| `cortex_system_user` | "cortex" | Default Cortex user |
+| `cortex_system_group` | "cortex" | Default Cortex group |
+| `cortex_version` | "1.4.0-rc.1" | The cortex package version |
+| `cortex_auth_enabled` | "false" | Enables of disables the Cortex authentication |
+| `cortex_server` | [From block storage example][bse] | Cortex server. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#server_config) |
+| `cortex_distributor` | [From block storage example][bse] | Cortex distributor. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#distributor_config) |
+| `cortex_ingester_client` | [From block storage example][bse] | Cortex ingester client. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#ingester_client_config) |
+| `cortex_ingester` | [From block storage example][bse] | Cortex ingester. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#ingester_config) |
+| `cortex_storage` | [From block storage example][bse] | Cortex storage. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#storage_config) |
+| `cortex_blocks_storage` | [From block storage example][bse] | Cortex blocks storage. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#blocks_storage_config) |
+| `cortex_compactor` | [From block storage example][bse] | Cortex compactor. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#compactor_config) |
+| `cortex_frontend_worker` | [From block storage example][bse] | Cortex frontend worker. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#frontend_worker_config) |
+| `cortex_ruler` | [From block storage example][bse] | Cortex ruler. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#ruler_config) |
+
+[bse]:https://github.com/cortexproject/cortex/blob/master/docs/configuration/single-process-config-blocks.yaml
 
 ## Example
 
@@ -31,11 +50,6 @@ Use it in a playbook as follows:
   roles:
     - cloudalchemy.cortex
 ```
-
-### Demo site
-
-We provide demo site for full monitoring solution based on prometheus and grafana. Repository with code and links to running instances is [available on github](https://github.com/prometheus/demo-site) and site is hosted on [DigitalOcean](https://digitalocean.com).
-
 ## Local Testing
 
 The preferred way of locally testing the role is to use Docker and [molecule](https://github.com/metacloud/molecule) (v2.x). You will have to install Docker on your system. See "Get started" for a Docker package suitable to for your system.
