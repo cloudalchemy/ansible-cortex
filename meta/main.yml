@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Julien Pivotto, Pawel Krupa
+  author: Matthias Antierens, Julien Pivotto
   description: Deploy cortex
   role_name: cortex
   license: MIT
