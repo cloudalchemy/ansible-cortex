@@ -8,6 +8,3 @@ go_arch_map:
 
 go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
 _cortex_binary_install_dir: '/usr/local/bin'
-
-cortex_system_user: "cortex"
-cortex_system_group: "cortex"

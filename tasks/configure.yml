@@ -14,7 +14,7 @@
     dest: "{{ cortex_config_dir }}/cortex.yml"
     force: true
     owner: root
-    group: cortex
+    group: "{{ cortex_system_user }}"
     mode: 0640
   notify:
     - reload cortex

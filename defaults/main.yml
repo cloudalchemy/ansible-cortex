@@ -9,6 +9,9 @@ cortex_config_file: 'cortex.yml.j2'
 cortex_config_dir: /etc/cortex
 cortex_db_dir: /var/lib/cortex
 
+cortex_system_user: "cortex"
+cortex_system_group: "cortex"
+
 cortex_version: 1.4.0-rc.1
 
 cortex_auth_enabled: false
