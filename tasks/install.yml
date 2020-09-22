@@ -15,6 +15,26 @@
     createhome: false
     home: /
 
+- name: create cortex data directory
+  file:
+    path: "{{ cortex_db_dir }}"
+    state: directory
+    owner: "{{ cortex_system_user }}"
+    group: "{{ cortex_system_group }}"
+    mode: 0755
+
+
+- name: create cortex configuration directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ cortex_system_user }}"
+    group: "{{ cortex_system_group }}"
+    mode: 0770
+  with_items:
+    - "{{ cortex_config_dir }}"
+    - "{{ cortex_config_dir }}/rules"
+
 - block:
   - name: download cortex binary and install it
     become: false
@@ -36,19 +56,19 @@
       mode: 0755
       owner: root
       group: root
-      notify: restarting cortex
+    notify: restart cortex
 
   when:
     - cortex_binary_local_dir | length == 0
     - not cortex_skip_install
 
- - name: propagate locally distributed cortex
-   copy:
-     src: "{{ cortex_binary_local_dir }}/cortex-linux-amd64"
-     dest: "{{ _cortex_binary_install_dir }}/cortex-linux-amd64"
-     mode: 0755
-     owner: root
-     group: root
+- name: propagate locally distributed cortex
+  copy:
+    src: "{{ cortex_binary_local_dir }}/cortex-linux-amd64"
+    dest: "{{ _cortex_binary_install_dir }}/cortex-linux-amd64"
+    mode: 0755
+    owner: root
+    group: root
   when:
     - cortex_binary_local_dir | length > 0
     - not cortex_skip_install
@@ -61,13 +81,13 @@
     group: root
     mode: 0644
   notify:
-    - restart prometheus
+    - restart cortex
 
 - name: Install SELinux dependencies
   package:
     name: "{{ item }}"
     state: present
-  with-items: "{{ cortex_selinux_packages }}"
+  with_items: "{{ cortex_selinux_packages }}"
   register: _install_packages
   until: _install_packages is succeeded
   retries: 5
@@ -76,7 +96,7 @@
     - ansible_version.full is version('2.4', '>=')
     - ansible_selinux.status == "enabled"
 
-- name: Allow prometheus to bind to port in SELinux
+- name: Allow cortex to bind to port in SELinux
   seport:
     ports: "{{ cortex_web_listen_address.split(':')[1] }}"
     proto: tcp

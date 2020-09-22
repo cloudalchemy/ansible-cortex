@@ -34,3 +34,14 @@
     enabled: true
   tags:
     - cortex_run
+
+- name: ensure cortex service is started and enabled
+  become: true
+  systemd:
+    daemon_reload: true
+    name: cortex
+    state: started
+    enabled: true
+  tags:
+    - cortex_run
+

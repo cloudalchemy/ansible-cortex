@@ -44,15 +44,15 @@
 - block:
     - name: "Get checksum list"
       set_fact:
-        __cortex_checksums: "{{ lookup('url', 'https://github.com/cortexproject/cortex/releases/download/v' + cortex_version + '/sha256sums.txt', wantlist=True) | list }}"
+        __cortex_checksums: "{{ lookup('url', 'https://github.com/cortexproject/cortex/releases/download/v' + cortex_version + '/cortex-linux-amd64-sha-256', wantlist=True) | list }}"
       run_once: true
 
     - name: "Get checksum for {{ go_arch }} architecture"
       set_fact:
         __cortex_checksum: "{{ item.split(' ')[0] }}"
       with_items: "{{ __cortex_checksums }}"
-      when:
-        - "('linux-' + go_arch + '.tar.gz') in item"
+        #when:
+        #  - "('linux-' + go_arch + '.tar.gz') in item"
   delegate_to: localhost
   when:
     - cortex_binary_local_dir | length == 0
