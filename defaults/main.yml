@@ -53,17 +53,17 @@ cortex_storage:
 
 cortex_blocks_storage:
   tsdb:
-    dir: /tmp/cortex/tsdb
+    dir: "{{ cortex_db_dir }}/tsdb"
 
   bucket_store:
-    sync_dir: /tmp/cortex/tsdb-sync
+    sync_dir: "{{ cortex_db_dir }}/tsdb-sync"
 
   backend: filesystem
   filesystem:
     dir: ./data/tsdb
 
 cortex_compactor:
-  data_dir: /tmp/cortex/compactor
+  data_dir: "{{ cortex_db_dir }}/compactor"
   sharding_ring:
     kvstore:
       store: inmemory
