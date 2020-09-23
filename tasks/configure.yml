@@ -7,3 +7,14 @@
     group: root
     mode: 0644
   notify: restart cortex
+
+- name: configure cortex
+  template:
+    src: "{{ cortex_config_file }}"
+    dest: "{{ cortex_config_dir }}/cortex.yml"
+    force: true
+    owner: root
+    group: "{{ cortex_system_user }}"
+    mode: 0640
+  notify:
+    - reload cortex

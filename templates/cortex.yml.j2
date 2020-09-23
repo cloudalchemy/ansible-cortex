@@ -1,0 +1,34 @@
+#jinja2: trim_blocks: True, lstrip_blocks: True
+{{ ansible_managed | comment }}
+# https://cortexmetrics.io/docs/
+
+auth_enabled: {{ cortex_auth_enabled }}
+
+server:
+  {{ cortex_server | to_nice_yaml(indent=2) | indent(2, False) }}
+
+distributor:
+  {{ cortex_distributor | to_nice_yaml(indent=2) | indent(2, False) }}
+
+ingester_client:
+  {{ cortex_ingester_client | to_nice_yaml(indent=2) | indent(2, False) }}
+
+ingester:
+  {{ cortex_ingester | to_nice_yaml(indent=2) | indent(2, False) }}
+
+storage:
+  {{ cortex_storage | to_nice_yaml(indent=2) | indent(2, False) }}
+
+blocks_storage:
+  {{ cortex_blocks_storage | to_nice_yaml(indent=2) | indent(2, False) }}
+
+compactor:
+  {{ cortex_compactor | to_nice_yaml(indent=2) | indent(2, False) }}
+
+frontend_worker:
+  {{ cortex_frontend_worker | to_nice_yaml(indent=2) | indent(2, False) }}
+
+ruler:
+  {{ cortex_ruler | to_nice_yaml(indent=2) | indent(2, False) }}
+
+

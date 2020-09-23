@@ -10,8 +10,10 @@ StartLimitIntervalSec=0
 Type=simple
 User={{ cortex_system_user }}
 Group={{ cortex_system_group }}
-ExecStart=/usr/local/bin/cortex
-SyslogIdentifier=cortex
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart={{ _cortex_binary_install_dir }}/cortex-linux-amd64 -config.file={{ cortex_config_dir }}/cortex.yml
+WorkingDirectory={{ cortex_db_dir }}
+SyslogIdentifier={{ cortex_system_user }}
 Restart=always
 RestartSec=5
 

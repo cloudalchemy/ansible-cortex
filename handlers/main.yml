@@ -5,3 +5,8 @@
     daemon_reload: true
     name: cortex
     state: restarted
+- name: reload cortex
+  become: true
+  systemd:
+    name: cortex
+    state: reloaded
