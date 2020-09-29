@@ -78,3 +78,35 @@ cortex_ruler:
     type: local
     local:
       directory: "{{ cortex_config_dir }}/rules"
+
+cortex_api: {}
+
+cortex_querier: {}
+
+cortex_flusher: {}
+
+cortex_chunk_store: {}
+
+cortex_schema: {}
+
+cortex_limits: {}
+
+cortex_prealloc: {}
+
+cortex_frontend: {}
+
+cortex_query_range: {}
+
+cortex_table_manager: {}
+
+cortex_store_gateway: {}
+
+cortex_purger: {}
+
+cortex_configs: {}
+
+cortex_alertmanager: {}
+
+cortex_runtime_config: {}
+
+cortex_memberlist: {}
