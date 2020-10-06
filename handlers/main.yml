@@ -1,12 +1,35 @@
 ---
-- name: restart cortex
+- name: restart cortex all-in-one
   become: true
   systemd:
     daemon_reload: true
     name: cortex
     state: restarted
-- name: reload cortex
+  listen: restart cortex
+  when: cortex_all_in_one
+- name: restart cortex all-in-one
+  become: true
+  systemd:
+    daemon_reload: true
+    name: cortex@{{item.key}}
+    state: restarted
+  listen: restart cortex
+  loop: "{{ cortex_services | dict2items }}"
+- name: restart cortex all-in-one
+  set_fact:
+    _cortex_service_status: started
+  listen: restart cortex
+- name: reload cortex all-in-one
   become: true
   systemd:
     name: cortex
-    state: reloaded
+    state: "{{ _cortex_service_status | default('reloaded') }}"
+  listen: reload cortex
+  when: cortex_all_in_one
+- name: reload cortex services
+  become: true
+  systemd:
+    name: cortex@{{item.key}}
+    state: "{{ _cortex_service_status | default('reloaded') }}"
+  listen: reload cortex
+  loop: "{{ cortex_services | dict2items }}"

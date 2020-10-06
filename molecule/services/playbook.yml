@@ -1,0 +1,27 @@
+---
+- name: Run role
+  hosts: all
+  any_errors_fatal: true
+  roles:
+    - ansible-cortex
+  vars:
+    cortex_config_dir: /cortex
+    cortex_db_dir: /cortexdb
+    cortex_system_user: "vortex"
+    cortex_system_group: "vortex"
+    cortex_all_in_one: false
+    cortex_services:
+      ingester:
+        server:
+            http_listen_port: 9009
+        ingester:
+            lifecycler:
+              join_after: 0
+              min_ready_duration: 0s
+              final_sleep: 0s
+              num_tokens: 512
+
+              ring:
+                kvstore:
+                  store: inmemory
+                  replication_factor: 1
