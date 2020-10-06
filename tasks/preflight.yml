@@ -1,4 +1,9 @@
 ---
+- name: Services should be empty when all-in-one-mode is enabled
+  assert:
+    that: cortex_all_in_one == (cortex_services|length == 0)
+    msg: "Exactly one of cortex_all_in_one or cortex_services should be set."
+
 - name: Assert usage of systemd as an init system
   assert:
     that: ansible_service_mgr == 'systemd'
@@ -11,6 +16,19 @@
   register: __systemd_version
   tags:
     - skip_ansible_lint
+
+- name: Get cortex units
+  become: true
+  command: systemctl list-units cortex@*.service -t service --full --all --plain --no-legend
+  changed_when: false
+  check_mode: false
+  register: __cortex_units
+  tags:
+    - skip_ansible_lint
+
+- name: List cortex units
+  set_fact:
+    existing_cortex_units: "{{ __cortex_units.stdout_lines | map('regex_replace','^cortex@([a-z_-]+).service.*','\\1') | list }}"
 
 - name: Set systemd version fact
   set_fact:

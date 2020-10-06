@@ -19,6 +19,8 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 
 | Name           | Default Value | Description                        |
 | -------------- | ------------- | -----------------------------------|
+| `cortex_all_in_one` | true | Setup Cortex in all-in-one binary mode. |
+| `cortex_services` | `{}` | Cortex services configurations. |
 | `cortex_web_listen_address` | "0.0.0.0:9009" | Address on which cortex will listen |
 | `cortex_binary_local_dir` | "" | Allows to use local packages instead of ones distributed on github. As parameter it takes a directory where `cortex` binaries are stored on host on which ansible is ran. This overrides `cortex_version` parameter |
 | `cortex_interface` | "{{ ansible_default_ipv4.interface }}" | Network adapter that cortex will be using |
@@ -66,6 +68,34 @@ Use it in a playbook as follows:
   roles:
     - cloudalchemy.cortex
 ```
+
+### Services mode
+
+You can run the different Cortex modules as separate services by setting
+`cortex_services` as a module:config map and `cortex_all_in_one` to `false`.
+```yaml
+- hosts: all
+  roles:
+    - cloudalchemy.cortex
+  vars:
+    cortex_all_in_one: false
+    cortex_services:
+      ingester:
+        server:
+            http_listen_port: 9009
+        ingester:
+            lifecycler:
+              join_after: 0
+              min_ready_duration: 0s
+              final_sleep: 0s
+              num_tokens: 512
+
+              ring:
+                kvstore:
+                  store: inmemory
+                  replication_factor: 1
+```
+
 ## Local Testing
 
 The preferred way of locally testing the role is to use Docker and [molecule](https://github.com/metacloud/molecule) (v2.x). You will have to install Docker on your system. See "Get started" for a Docker package suitable to for your system.

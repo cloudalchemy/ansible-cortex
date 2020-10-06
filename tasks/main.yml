@@ -26,7 +26,7 @@
   tags:
     - cortex_configure
 
-- name: Ensure cortex is enabled on boot
+- name: Ensure cortex all-in-one is enabled on boot
   become: true
   systemd:
     daemon_reload: true
@@ -34,13 +34,58 @@
     enabled: true
   tags:
     - cortex_run
+  when: cortex_all_in_one
 
-- name: ensure cortex service is started and enabled
+- name: ensure cortex all-in-one service is started and enabled
   become: true
   systemd:
     daemon_reload: true
     name: cortex
+    state: "{% if cortex_all_in_one %}started{% else %}stopped{%endif%}"
+    enabled: "{{ cortex_all_in_one }}"
+  tags:
+    - cortex_run
+
+- name: Ensure cortex services are disabled on boot
+  become: true
+  systemd:
+    daemon_reload: true
+    name: cortex@{{ item }}
+    enabled: false
+  tags:
+    - cortex_run
+  when: "item not in cortex_services"
+  loop: "{{ existing_cortex_units }}"
+
+- name: Ensure cortex services are stopped
+  become: true
+  systemd:
+    daemon_reload: true
+    name: cortex@{{ item }}
+    state: "stopped"
+    enabled: false
+  tags:
+    - cortex_run
+  when: "item not in cortex_services"
+  loop: "{{ existing_cortex_units }}"
+
+- name: Ensure cortex services are enabled on boot
+  become: true
+  systemd:
+    daemon_reload: true
+    name: cortex@{{ item.key }}
+    enabled: true
+  tags:
+    - cortex_run
+  loop: "{{ cortex_services | dict2items }}"
+
+- name: ensure cortex services are started and enabled
+  become: true
+  systemd:
+    daemon_reload: true
+    name: cortex@{{ item.key }}
     state: started
     enabled: true
   tags:
     - cortex_run
+  loop: "{{ cortex_services | dict2items }}"

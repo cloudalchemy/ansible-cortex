@@ -1,12 +1,13 @@
 ---
 - name: Copy the cortex systemd service file
   template:
-    src: cortex.service.j2
-    dest: /etc/systemd/system/cortex.service
+    src: "{{ item }}.service.j2"
+    dest: /etc/systemd/system/{{ item }}.service
     owner: root
     group: root
     mode: 0644
   notify: restart cortex
+  loop: [cortex, cortex@]
 
 - name: configure cortex
   template:
@@ -18,3 +19,16 @@
     mode: 0640
   notify:
     - reload cortex
+  when: cortex_all_in_one
+
+- name: configure cortex targets
+  copy:
+    content: "{{ item.value | to_nice_yaml(indent=2) }}"
+    dest: "{{ cortex_config_dir }}/cortex-{{ item.key }}.yml"
+    force: true
+    owner: root
+    group: "{{ cortex_system_user }}"
+    mode: 0640
+  notify:
+    - reload cortex
+  loop: "{{ cortex_services | dict2items }}"

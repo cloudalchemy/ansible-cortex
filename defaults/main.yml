@@ -1,7 +1,12 @@
 ---
+cortex_version: 1.4.0
+cortex_all_in_one: true
+
 cortex_web_listen_address: "0.0.0.0:9009"
 cortex_binary_local_dir: ''
 cortex_skip_install: false
+
+cortex_services: {}
 
 cortex_interface: "{{ ansible_default_ipv4.interface }}"
 
@@ -11,8 +16,6 @@ cortex_db_dir: /var/lib/cortex
 
 cortex_system_user: "cortex"
 cortex_system_group: "cortex"
-
-cortex_version: 1.4.0
 
 cortex_auth_enabled: false
 
