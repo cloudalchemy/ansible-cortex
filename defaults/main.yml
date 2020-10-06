@@ -12,7 +12,7 @@ cortex_db_dir: /var/lib/cortex
 cortex_system_user: "cortex"
 cortex_system_group: "cortex"
 
-cortex_version: 1.4.0-rc.1
+cortex_version: 1.4.0
 
 cortex_auth_enabled: false
 

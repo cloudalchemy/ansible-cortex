@@ -26,7 +26,7 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | `cortex_db_dir` | "/var/lib/cortex" | Path to the directory of the Cortex database |
 | `cortex_system_user` | "cortex" | Default Cortex user |
 | `cortex_system_group` | "cortex" | Default Cortex group |
-| `cortex_version` | "1.4.0-rc.1" | The cortex package version |
+| `cortex_version` | "1.4.0" | The cortex package version |
 | `cortex_auth_enabled` | "false" | Enables of disables the Cortex authentication |
 | `cortex_alertmanager` | `{}` | Cortex alertmanager. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#alertmanager_config) |
 | `cortex_api` | `{}` | Cortex api. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/) |
