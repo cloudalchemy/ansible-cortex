@@ -13,15 +13,15 @@
     cortex_services:
       ingester:
         server:
-            http_listen_port: 9009
+          http_listen_port: 9009
         ingester:
-            lifecycler:
-              join_after: 0
-              min_ready_duration: 0s
-              final_sleep: 0s
-              num_tokens: 512
+          lifecycler:
+            join_after: 0
+            min_ready_duration: 0s
+            final_sleep: 0s
+            num_tokens: 512
 
-              ring:
-                kvstore:
-                  store: inmemory
-                  replication_factor: 1
+            ring:
+              kvstore:
+                store: inmemory
+                replication_factor: 1
