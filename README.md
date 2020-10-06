@@ -28,15 +28,31 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | `cortex_system_group` | "cortex" | Default Cortex group |
 | `cortex_version` | "1.4.0-rc.1" | The cortex package version |
 | `cortex_auth_enabled` | "false" | Enables of disables the Cortex authentication |
-| `cortex_server` | [From block storage example][bse] | Cortex server. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#server_config) |
+| `cortex_alertmanager` | `{}` | Cortex alertmanager. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#alertmanager_config) |
+| `cortex_api` | `{}` | Cortex api. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/) |
+| `cortex_blocks_storage` | [From block storage example][bse] | Cortex blocks storage. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#blocks_storage_config) |
+| `cortex_chunck_store` | `{}` | Cortex chunck store. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#configstore_config) |
+| `cortex_compactor` | [From block storage example][bse] | Cortex compactor. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#compactor_config) |
+| `cortex_configs` | `{}` | Cortex configs. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#configs_config) |
 | `cortex_distributor` | [From block storage example][bse] | Cortex distributor. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#distributor_config) |
+| `cortex_flusher` | `{}` | Cortex flusher. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#flusher_config) |
+| `cortex_frontend_worker` | [From block storage example][bse] | Cortex frontend worker. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#frontend_worker_config) |
+| `cortex_frontend` | `{}` | Cortex frontend. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/) |
 | `cortex_ingester_client` | [From block storage example][bse] | Cortex ingester client. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#ingester_client_config) |
 | `cortex_ingester` | [From block storage example][bse] | Cortex ingester. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#ingester_config) |
-| `cortex_storage` | [From block storage example][bse] | Cortex storage. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#storage_config) |
-| `cortex_blocks_storage` | [From block storage example][bse] | Cortex blocks storage. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#blocks_storage_config) |
-| `cortex_compactor` | [From block storage example][bse] | Cortex compactor. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#compactor_config) |
-| `cortex_frontend_worker` | [From block storage example][bse] | Cortex frontend worker. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#frontend_worker_config) |
+| `cortex_limits` | `{}` | Cortex limits. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#limits_config) |
+| `cortex_memberlist` | `{}` | Cortex memberlist. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#memberlist_config) |
+| `cortex_prealloc` | `{}` | Cortex prealloc. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/) |
+| `cortex_purger` | `{}` | Cortex purger. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#purger_config) |
+| `cortex_querier` | `{}` | Cortex querier. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#querier_config) |
+| `cortex_query_range` | `{}` | Cortex query range. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#query_range_config) |
 | `cortex_ruler` | [From block storage example][bse] | Cortex ruler. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#ruler_config) |
+| `cortex_runtime_config` | `{}` | Cortex runtime config. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/) |
+| `cortex_schema` | `{}` | Cortex schema. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/) |
+| `cortex_server` | [From block storage example][bse] | Cortex server. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#server_config) |
+| `cortex_storage` | [From block storage example][bse] | Cortex storage. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#storage_config) |
+| `cortex_store_gateway` | `{}` | Cortex store gateway. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#store_gateway_config) |
+| `cortex_table_manager` | `{}` | Cortex table manager. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#table_manager_config) |
 
 [bse]:https://github.com/cortexproject/cortex/blob/master/docs/configuration/single-process-config-blocks.yaml
 

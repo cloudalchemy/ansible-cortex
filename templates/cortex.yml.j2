@@ -31,4 +31,50 @@ frontend_worker:
 ruler:
   {{ cortex_ruler | to_nice_yaml(indent=2) | indent(2, False) }}
 
+api:
+  {{ cortex_api | to_nice_yaml(indent=2) | indent(2, False) }}
 
+querier:
+  {{ cortex_querier | to_nice_yaml(indent=2) | indent(2, False) }}
+
+flusher:
+  {{ cortex_flusher | to_nice_yaml(indent=2) | indent(2, False) }}
+
+chunk_store:
+  {{ cortex_chunk_store | to_nice_yaml(indent=2) | indent(2, False) }}
+
+schema:
+  {{ cortex_schema | to_nice_yaml(indent=2) | indent(2, False) }}
+
+limits:
+  {{ cortex_limits | to_nice_yaml(indent=2) | indent(2, False) }}
+
+prealloc:
+  {{ cortex_prealloc | to_nice_yaml(indent=2) | indent(2, False) }}
+
+frontend:
+  {{ cortex_frontend | to_nice_yaml(indent=2) | indent(2, False) }}
+
+query_range:
+  {{ cortex_query_range | to_nice_yaml(indent=2) | indent(2, False) }}
+
+table_manager:
+  {{ cortex_table_manager | to_nice_yaml(indent=2) | indent(2, False) }}
+
+store_gateway:
+  {{ cortex_store_gateway | to_nice_yaml(indent=2) | indent(2, False) }}
+
+purger:
+  {{ cortex_purger | to_nice_yaml(indent=2) | indent(2, False) }}
+
+configs:
+  {{ cortex_configs | to_nice_yaml(indent=2) | indent(2, False) }}
+
+alertmanager:
+  {{ cortex_alertmanager | to_nice_yaml(indent=2) | indent(2, False) }}
+
+runtime_config:
+  {{ cortex_runtime_config | to_nice_yaml(indent=2) | indent(2, False) }}
+
+memberlist:
+  {{ cortex_memberlist | to_nice_yaml(indent=2) | indent(2, False) }}
