@@ -50,22 +50,24 @@
   become: true
   systemd:
     daemon_reload: true
-    name: "cortex@*"
+    name: cortex@{{ item }}
     enabled: false
   tags:
     - cortex_run
-  when: cortex_all_in_one
+  when: "item not in cortex_services"
+  loop: "{{ existing_cortex_units }}"
 
 - name: Ensure cortex services are stopped
   become: true
   systemd:
     daemon_reload: true
-    name: cortex@*
+    name: cortex@{{ item }}
     state: "stopped"
     enabled: false
   tags:
     - cortex_run
-  when: cortex_all_in_one
+  when: "item not in cortex_services"
+  loop: "{{ existing_cortex_units }}"
 
 - name: Ensure cortex services are enabled on boot
   become: true
