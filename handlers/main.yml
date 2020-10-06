@@ -11,7 +11,7 @@
   become: true
   systemd:
     daemon_reload: true
-    name: cortex@{{item.key}}
+    name: cortex@{{ item.key }}
     state: restarted
   listen: restart cortex
   loop: "{{ cortex_services | dict2items }}"
@@ -29,7 +29,7 @@
 - name: reload cortex services
   become: true
   systemd:
-    name: cortex@{{item.key}}
+    name: cortex@{{ item.key }}
     state: "{{ _cortex_service_status | default('reloaded') }}"
   listen: reload cortex
   loop: "{{ cortex_services | dict2items }}"

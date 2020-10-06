@@ -71,7 +71,7 @@
   become: true
   systemd:
     daemon_reload: true
-    name: cortex@{{item.key}}
+    name: cortex@{{ item.key }}
     enabled: true
   tags:
     - cortex_run
@@ -81,7 +81,7 @@
   become: true
   systemd:
     daemon_reload: true
-    name: cortex@{{item.key}}
+    name: cortex@{{ item.key }}
     state: started
     enabled: true
   tags:
