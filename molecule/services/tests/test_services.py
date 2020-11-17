@@ -47,6 +47,17 @@ def test_service(host):
     assert s.is_running
 
 
-def test_socket(host):
-    s = host.socket("tcp://0.0.0.0:9009")
+@pytest.mark.parametrize("port", [9009, 9010, 9095, 9096])
+def test_socket(host, port):
+    s = host.socket("tcp://0.0.0.0:%d" % port)
     assert s.is_listening
+
+def test_config_file_no_target(host):
+    f = host.file("/cortex/cortex-ingester.yml")
+    config = yaml.load(f.content_string, Loader=yaml.SafeLoader)
+    assert config["target"] == "ingester"
+
+def test_config_file_explicit_target(host):
+    f = host.file("/cortex/cortex-readpath.yml")
+    config = yaml.load(f.content_string, Loader=yaml.SafeLoader)
+    assert config["target"] == "querier,store-gateway"
