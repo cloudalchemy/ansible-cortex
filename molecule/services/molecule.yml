@@ -72,6 +72,3 @@ scenario:
   name: services
 verifier:
   name: testinfra
-  lint:
-    name: flake8
-    enabled: true
