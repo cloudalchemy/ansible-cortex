@@ -3,11 +3,8 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
-  flake8
+lint:
+  name: yamllint
 platforms:
   - name: buster
     image: quay.io/paulfantom/molecule-systemd:debian-10
@@ -40,3 +37,6 @@ scenario:
   name: latest
 verifier:
   name: testinfra
+  lint:
+    name: flake8
+    enabled: true
