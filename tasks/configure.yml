@@ -23,7 +23,7 @@
 
 - name: configure cortex targets
   copy:
-    content: "{{ item.value | to_nice_yaml(indent=2) }}"
+    content: "{{ {'target': item.key} | combine (item.value) | to_nice_yaml(indent=2) }}"
     dest: "{{ cortex_config_dir }}/cortex-{{ item.key }}.yml"
     force: true
     owner: root

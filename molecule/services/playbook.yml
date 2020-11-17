@@ -20,8 +20,25 @@
             min_ready_duration: 0s
             final_sleep: 0s
             num_tokens: 512
-
             ring:
               kvstore:
                 store: inmemory
-                replication_factor: 1
+        storage:
+          engine: blocks
+        blocks_storage:
+          backend: filesystem
+          filesystem:
+            dir: /tmp/blocks
+      readpath:
+        target: querier,store-gateway
+        server:
+          http_listen_port: 9010
+          grpc_listen_port: 9096
+        storage:
+          engine: blocks
+        querier:
+          store_gateway_addresses: 127.0.0.1:9096
+        blocks_storage:
+          backend: filesystem
+          filesystem:
+            dir: /tmp/blocks
