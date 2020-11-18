@@ -26,6 +26,7 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | `cortex_interface` | "{{ ansible_default_ipv4.interface }}" | Network adapter that cortex will be using |
 | `cortex_config_dir` | "/etc/cortex" | Default directory for the cortex config |
 | `cortex_db_dir` | "/var/lib/cortex" | Path to the directory of the Cortex database |
+| `cortex_limit_nofile` | 10240 | Number of File Descriptors allowed for Cortex processes |
 | `cortex_system_user` | "cortex" | Default Cortex user |
 | `cortex_system_group` | "cortex" | Default Cortex group |
 | `cortex_version` | "1.4.0" | The cortex package version |
