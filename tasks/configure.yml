@@ -32,3 +32,10 @@
   notify:
     - reload cortex
   loop: "{{ cortex_services | dict2items }}"
+
+- name: Configure cortex environment file
+  template:
+    src: "cortex.environment.j2"
+    dest: "{{ cortex_environment_location }}/{{ cortex_environment_file }}"
+    mode: 0644
+  notify: reload cortex

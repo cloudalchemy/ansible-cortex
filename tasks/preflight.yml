@@ -73,3 +73,10 @@
   when:
     - cortex_binary_local_dir | length == 0
     - not cortex_skip_install
+
+- name: Assert that environment variables are asserted with services
+  assert:
+    that:
+      - "item in cortex_services"
+  with_items: "{{ cortex_env_variables }}"
+  when: not cortex_all_in_one
