@@ -1,10 +1,7 @@
 ---
 extends: default
 ignore: |
-  .travis/
-  .travis.yml
   .github/
-  .tox/
   meta/
 
 rules:
