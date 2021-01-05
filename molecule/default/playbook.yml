@@ -3,3 +3,8 @@
   any_errors_fatal: true
   roles:
     - name: ansible-cortex
+  vars:
+    cortex_env_variables:
+      JAEGER_AGENT_HOST: localhost
+      JAEGER_SAMPLER_PARAM: 0
+      JAEGER_SAMPLER_TYPE: const
