@@ -1,5 +1,4 @@
 {{ ansible_managed | comment }}
-{# LOOP over environment file to make jaeger envonment file #}
 
 {% for name,value in cortex_env_variables.items() %}
 {{ name }}={{ value }}
