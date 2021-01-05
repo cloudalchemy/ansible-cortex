@@ -29,6 +29,7 @@ def test_directories(host, dirs):
     "/cortex/cortex.yml",
     "/etc/systemd/system/cortex.service",
     "/usr/local/bin/cortex-linux-amd64",
+    "/etc/default/cortex",
 ])
 def test_files(host, files):
     f = host.file(files)

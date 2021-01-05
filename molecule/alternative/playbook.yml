@@ -9,3 +9,7 @@
     cortex_db_dir: /cortexdb
     cortex_system_user: "vortex"
     cortex_system_group: "vortex"
+    cortex_env_variables:
+      JAEGER_AGENT_HOST: localhost
+      JAEGER_SAMPLER_PARAM: 0
+      JAEGER_SAMPLER_TYPE: const

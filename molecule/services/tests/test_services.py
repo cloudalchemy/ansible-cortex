@@ -29,6 +29,7 @@ def test_directories(host, dirs):
     "/cortex/cortex-ingester.yml",
     "/etc/systemd/system/cortex@.service",
     "/usr/local/bin/cortex-linux-amd64",
+    "/etc/default/cortex-ingester",
 ])
 def test_files(host, files):
     f = host.file(files)
@@ -47,7 +48,7 @@ def test_service(host):
     assert s.is_running
 
 
-@pytest.mark.parametrize("port", [9009, 9010, 9095, 9096])
+@pytest.mark.parametrize("port", [9009, 9010, 9096])
 def test_socket(host, port):
     s = host.socket("tcp://0.0.0.0:%d" % port)
     assert s.is_listening

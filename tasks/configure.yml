@@ -36,6 +36,15 @@
 - name: Configure cortex environment file
   template:
     src: "cortex.environment.j2"
-    dest: "{{ cortex_environment_location }}/{{ cortex_environment_file }}"
+    dest: "{{ cortex_environment_location }}/cortex"
     mode: 0644
   notify: reload cortex
+  when: cortex_all_in_one
+
+- name: Configure cortex environment file for services
+  template:
+    src: "cortex@.environment.j2"
+    dest: "{{ cortex_environment_location }}/cortex-{{ item.key }}"
+    mode: 0644
+  notify: reload cortex
+  loop: "{{ cortex_env_variables | dict2items }}"

@@ -19,7 +19,6 @@ cortex_system_group: "cortex"
 
 cortex_auth_enabled: false
 
-cortex_environment_file: cortex
 cortex_environment_location: /etc/default
 cortex_env_variables: {}
 
