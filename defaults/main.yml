@@ -1,5 +1,5 @@
 ---
-cortex_version: 1.5.0
+cortex_version: 1.6.0
 cortex_all_in_one: true
 
 cortex_web_listen_address: "0.0.0.0:9009"
