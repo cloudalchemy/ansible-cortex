@@ -48,3 +48,4 @@
     mode: 0644
   notify: reload cortex
   loop: "{{ cortex_env_variables | dict2items }}"
+  when: not cortex_all_in_one
