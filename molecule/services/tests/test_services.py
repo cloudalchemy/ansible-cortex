@@ -48,7 +48,7 @@ def test_service(host):
     assert s.is_running
 
 
-@pytest.mark.parametrize("port", [9009, 9010, 9096])
+@pytest.mark.parametrize("port", [9009, 9010, 9095, 9096])
 def test_socket(host, port):
     s = host.socket("tcp://0.0.0.0:%d" % port)
     assert s.is_listening
