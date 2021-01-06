@@ -20,6 +20,9 @@ cortex_system_group: "cortex"
 
 cortex_auth_enabled: false
 
+cortex_environment_location: /etc/default
+cortex_env_variables: {}
+
 cortex_server:
   http_listen_port: 9009
 

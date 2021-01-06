@@ -36,6 +36,12 @@ jobs:
            echo 'No alternative test'
          fi
       - run: |
+         if [[ -d 'molecule/services' ]]; then
+           molecule test -s services --destroy never
+         else
+           echo 'No services test'
+         fi
+      - run: |
          if [[ -z "${CIRCLE_PULL_REQUEST}" ]]; then
            molecule test -s latest --destroy never
          else

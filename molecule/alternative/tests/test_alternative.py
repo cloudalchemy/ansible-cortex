@@ -29,6 +29,7 @@ def test_directories(host, dirs):
     "/cortex/cortex.yml",
     "/etc/systemd/system/cortex.service",
     "/usr/local/bin/cortex-linux-amd64",
+    "/etc/default/cortex",
 ])
 def test_files(host, files):
     f = host.file(files)
@@ -50,3 +51,10 @@ def test_service(host):
 def test_socket(host):
     s = host.socket("tcp://0.0.0.0:9009")
     assert s.is_listening
+
+
+def test_string(host):
+    f = host.file("/etc/default/cortex")
+    assert "KAEGER_AGENT_HOST=localhost\n" in f.content_string
+    assert "KAEGER_SAMPLER_PARAM=0\n" in f.content_string
+    assert "KAEGER_SAMPLER_TYPE=const\n" in f.content_string

@@ -42,3 +42,12 @@
           backend: filesystem
           filesystem:
             dir: /tmp/blocks
+    cortex_env_variables:
+      ingester:
+        KAEGER_AGENT_HOST: localhost
+        KAEGER_SAMPLER_PARAM: 0
+        KAEGER_SAMPLER_TYPE: const
+      readpath:
+        KAEGER_AGENT_HOST: localhost
+        KAEGER_SAMPLER_PARAM: 0.1
+        KAEGER_SAMPLER_TYPE: probabilistic

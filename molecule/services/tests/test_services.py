@@ -29,6 +29,7 @@ def test_directories(host, dirs):
     "/cortex/cortex-ingester.yml",
     "/etc/systemd/system/cortex@.service",
     "/usr/local/bin/cortex-linux-amd64",
+    "/etc/default/cortex-ingester",
 ])
 def test_files(host, files):
     f = host.file(files)
@@ -63,3 +64,17 @@ def test_config_file_explicit_target(host):
     f = host.file("/cortex/cortex-readpath.yml")
     config = yaml.load(f.content_string, Loader=yaml.SafeLoader)
     assert config["target"] == "querier,store-gateway"
+
+
+def test_string(host):
+    f = host.file("/etc/default/cortex-ingester")
+    assert "KAEGER_AGENT_HOST=localhost\n" in f.content_string
+    assert "KAEGER_SAMPLER_PARAM=0\n" in f.content_string
+    assert "KAEGER_SAMPLER_TYPE=const\n" in f.content_string
+
+
+def test_string2(host):
+    f = host.file("/etc/default/cortex-readpath")
+    assert "KAEGER_SAMPLER_TYPE=probabilistic\n" in f.content_string
+    assert "KAEGER_SAMPLER_PARAM=0.1\n" in f.content_string
+    assert "KAEGER_SAMPLER_TYPE=probabilistic\n" in f.content_string
