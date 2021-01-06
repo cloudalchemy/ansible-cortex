@@ -47,5 +47,5 @@
     dest: "{{ cortex_environment_location }}/cortex-{{ item.key }}"
     mode: 0644
   notify: reload cortex
-  loop: "{{ cortex_env_variables | dict2items }}"
+  loop: "{{ dict(cortex_services.keys() | zip_longest([], fillvalue={}) | list) | combine(cortex_env_variables) | dict2items }}"
   when: not cortex_all_in_one
