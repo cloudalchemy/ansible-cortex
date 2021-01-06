@@ -64,3 +64,11 @@ def test_config_file_explicit_target(host):
     f = host.file("/cortex/cortex-readpath.yml")
     config = yaml.load(f.content_string, Loader=yaml.SafeLoader)
     assert config["target"] == "querier,store-gateway"
+
+def test_string(host):
+    f = host.file("/etc/default/cortex-ingester")
+    assert "KAEGER_AGENT_HOST=localhost" in f.content_string
+
+def test_string2(host):
+    f = host.file("/etc/default/cortex-readpath")
+    assert "KAEGER_SAMPLER_TYPE=probabilistic" in f.content_string
