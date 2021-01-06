@@ -5,6 +5,7 @@ cortex_all_in_one: true
 cortex_web_listen_address: "0.0.0.0:9009"
 cortex_binary_local_dir: ''
 cortex_skip_install: false
+cortex_limit_nofile: 10240
 
 cortex_services: {}
 
