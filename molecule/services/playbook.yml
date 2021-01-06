@@ -42,6 +42,16 @@
           backend: filesystem
           filesystem:
             dir: /tmp/blocks
+      compactor:
+        server:
+          http_listen_port: 9011
+          grpc_listen_port: 9097
+        storage:
+          engine: blocks
+        blocks_storage:
+          backend: filesystem
+          filesystem:
+            dir: /tmp/blocks
     cortex_env_variables:
       ingester:
         KAEGER_AGENT_HOST: localhost
