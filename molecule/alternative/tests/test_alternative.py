@@ -55,4 +55,6 @@ def test_socket(host):
 
 def test_string(host):
     f = host.file("/etc/default/cortex")
-    assert "JAEGER_AGENT_HOST=localhost" in f.content_string
+    assert "KAEGER_AGENT_HOST=localhost" in f.content_string
+    assert "KAEGER_SAMPLER_PARAM=0" in f.content_string
+    assert "KAEGER_SAMPLER_TYPE=const" in f.content_string

@@ -69,8 +69,12 @@ def test_config_file_explicit_target(host):
 def test_string(host):
     f = host.file("/etc/default/cortex-ingester")
     assert "KAEGER_AGENT_HOST=localhost" in f.content_string
+    assert "KAEGER_SAMPLER_PARAM=0" in f.content_string
+    assert "KAEGER_SAMPLER_TYPE=const" in f.content_string
 
 
 def test_string2(host):
     f = host.file("/etc/default/cortex-readpath")
+    assert "KAEGER_SAMPLER_TYPE=probabilistic" in f.content_string
+    assert "KAEGER_SAMPLER_PARAM=0.1" in f.content_string
     assert "KAEGER_SAMPLER_TYPE=probabilistic" in f.content_string
