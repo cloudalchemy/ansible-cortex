@@ -52,6 +52,7 @@ def test_socket(host):
     s = host.socket("tcp://0.0.0.0:9009")
     assert s.is_listening
 
+
 def test_string(host):
     f = host.file("/etc/default/cortex")
     assert "JAEGER_AGENT_HOST=localhost" in f.content_string
