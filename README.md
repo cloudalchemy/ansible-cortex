@@ -30,6 +30,7 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | `cortex_system_group` | "cortex" | Default Cortex group |
 | `cortex_version` | "1.6.0" | The cortex package version |
 | `cortex_auth_enabled` | "false" | Enables of disables the Cortex authentication |
+| `cortex_env_variables` | `{}` | Configure Cortex environment variables. |
 | `cortex_alertmanager` | `{}` | Cortex alertmanager. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#alertmanager_config) |
 | `cortex_api` | `{}` | Cortex api. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/) |
 | `cortex_blocks_storage` | [From block storage example][bse] | Cortex blocks storage. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#blocks_storage_config) |
@@ -94,6 +95,11 @@ You can run the different Cortex modules as separate services by setting
                 kvstore:
                   store: inmemory
                   replication_factor: 1
+    cortex_env_variables:
+      ingester:
+        JAEGER_AGENT_HOST: localhost
+        JAEGER_SAMPLER_PARAM: 0
+        JAEGER_SAMPLER_TYPE: const
 ```
 
 ## Local Testing
