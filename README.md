@@ -29,7 +29,7 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | `cortex_limit_nofile` | 10240 | Number of File Descriptors allowed for Cortex processes |
 | `cortex_system_user` | "cortex" | Default Cortex user |
 | `cortex_system_group` | "cortex" | Default Cortex group |
-| `cortex_version` | "1.6.0" | The cortex package version |
+| `cortex_version` | 1.7.0" | The cortex package version |
 | `cortex_auth_enabled` | "false" | Enables of disables the Cortex authentication |
 | `cortex_env_variables` | `{}` | Configure Cortex environment variables. |
 | `cortex_alertmanager` | `{}` | Cortex alertmanager. Compatible with [official configuration](https://cortexmetrics.io/docs/configuration/configuration-file/#alertmanager_config) |
