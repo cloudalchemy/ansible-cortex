@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Matthias Antierens, Julien Pivotto
+  author: cloudalchemy
   description: Deploy cortex
   role_name: cortex
   license: MIT
